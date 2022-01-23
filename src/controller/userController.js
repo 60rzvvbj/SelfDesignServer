@@ -43,8 +43,9 @@ function run(app) {
 		});
 	});
 
-	app.get('/user/modifyUsername', async function (req, res) {
+	app.POST('/user/modifyUsername', async function (req, res) {
 		let token = req.header.token;
+		let username = req.body.username;
 
 		// 处理
 
