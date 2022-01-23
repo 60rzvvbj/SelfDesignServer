@@ -7,7 +7,7 @@ let config = {
 	port: '3306',
 	user: 'root',
 	password: 'root',
-	database: 'gdufvoucher',
+	database: 'SelfDesign',
 	encoding: 'UTF8'
 };
 

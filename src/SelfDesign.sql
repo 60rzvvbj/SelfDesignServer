@@ -1,4 +1,4 @@
-create database SelfDesing;
+create database SelfDesign;
 
 create table user(
 	account varchar(20) PRIMARY KEY,
