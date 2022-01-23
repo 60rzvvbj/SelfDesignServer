@@ -1,17 +1,17 @@
 import child_process from 'child_process';
 let exec = child_process.exec;
 function open() {
-    exec('node main.js', function(err, stdout, stderr) {
-        if (err) {
-            console.log(stdout);
-            console.log('==============');
-            console.log(err);
-        } else {
-            console.log(stdout);
-        }
+	exec('node main.js', function (err, stdout, stderr) {
+		if (err) {
+			console.log(stdout);
+			console.log('==============');
+			console.log(err);
+		} else {
+			console.log(stdout);
+		}
 		console.log("服务器重启");
-        open();
-    });
+		open();
+	});
 }
 
 console.log("服务器启动");

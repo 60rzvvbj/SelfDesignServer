@@ -12,5 +12,5 @@ create table project(
 	account varchar(20),
 	content text,
 	createTime long,
-	updateTime long
+	modifyTime long
 );

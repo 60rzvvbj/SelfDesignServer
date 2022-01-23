@@ -69,14 +69,10 @@ let staticUrl = path.resolve('../webapp/');
 app.use(express.static(staticUrl));
 
 // 控制器
-// import fakerController from './controller/fakerController.js';
-// import loginController from './controller/loginController.js';
-// import indexController from './controller/indexController.js';
-// import colorController from './controller/colorController.js';
-// fakerController.run(app);
-// loginController.run(app);
-// indexController.run(app);
-// colorController.run(app);
+import userController from './controller/userController.js';
+import projectController from './controller/projectController.js';
+userController.run(app);
+projectController.run(app);
 
 // 端口
 let port = 80;
