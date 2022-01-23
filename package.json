@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "exec": "node src/control.js",
-    "test": "node src/main.js"
+    "test": "node src/main.js",
+    "close": "node src/close.js"
   },
   "type": "module",
   "author": "60rzvvbj",

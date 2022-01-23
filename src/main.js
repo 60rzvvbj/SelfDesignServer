@@ -79,3 +79,6 @@ let port = 80;
 
 app.listen(port);
 console.log('服务器已启动 端口号' + port);
+
+let pid = process.pid;
+fs.writeFileSync('log/pid.log', pid);
