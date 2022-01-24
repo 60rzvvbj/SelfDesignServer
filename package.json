@@ -1,6 +1,6 @@
 {
   "name": "selfdesignserver",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "SelfDesign Server",
   "main": "main.js",
   "scripts": {
