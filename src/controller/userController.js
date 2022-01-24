@@ -43,7 +43,7 @@ function run(app) {
 		});
 	});
 
-	app.POST('/user/modifyPassword', async function (req, res) {
+	app.post('/user/modifyPassword', async function (req, res) {
 		let token = req.header.token;
 		let oldPwd = req.body.oldPwd;
 		let newPwd = req.body.newPwd;
@@ -59,7 +59,7 @@ function run(app) {
 
 	});
 
-	app.POST('/user/modifyUsername', async function (req, res) {
+	app.post('/user/modifyUsername', async function (req, res) {
 		let token = req.header.token;
 		let username = req.body.username;
 
