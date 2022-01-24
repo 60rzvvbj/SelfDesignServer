@@ -3,7 +3,7 @@ import md5Util from "../utils/md5Util.js";
 
 async function register(account, pwd) {
 	let user = await userDao.getUser(account);
-	let pwd = md5Util.hex_md5(pwd);
+	pwd = md5Util.hex_md5(pwd);
 	if (user != null) {
 		return false;
 	} else {
@@ -13,8 +13,12 @@ async function register(account, pwd) {
 
 async function login(account, pwd) {
 	let user = await userDao.getUser(account);
-	let pwd = md5Util.hex_md5(pwd);
-	return user.pwd == pwd;
+	if (user == null) {
+		return false;
+	} else {
+		pwd = md5Util.hex_md5(pwd);
+		return user.pwd == pwd;
+	}
 }
 
 async function modifyPwd(account, oldPwd, newpwd) {

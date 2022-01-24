@@ -6,7 +6,7 @@
   "scripts": {
     "exec": "node src/control.js",
     "serve": "node src/main.js",
-    "test": "node src/scripts/tesst.js",
+    "test": "node src/scripts/test.js",
     "close": "node src/close.js"
   },
   "type": "module",
