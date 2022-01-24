@@ -43,8 +43,25 @@ function run(app) {
 		});
 	});
 
-	app.get('/user/modifyUsername', async function (req, res) {
+	app.POST('/user/modifyPassword', async function (req, res) {
 		let token = req.header.token;
+		let oldPwd = req.body.oldPwd;
+		let newPwd = req.body.newPwd;
+
+		// 处理
+
+		res.send({
+			flag: true,
+			code: 2000,
+			message: '修改成功',
+			data: null
+		});
+
+	});
+
+	app.POST('/user/modifyUsername', async function (req, res) {
+		let token = req.header.token;
+		let username = req.body.username;
 
 		// 处理
 

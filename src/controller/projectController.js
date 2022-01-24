@@ -4,23 +4,22 @@ function run(app) {
 
 	app.post('/project/createProject', async function (req, res) {
 		let token = req.header.token;
-		let projectName = req.header.name;
+		let projectName = req.body.name;
 
 		res.send({
 			flag: true,
 			code: 2000,
 			message: '创建成功',
 			data: {
-				id: 1,
+				id: "10001",
 				createTime: Date.now(),
-				modifyTime: Date.now()
 			}
 		});
 	});
 
-	app.get('/project/deleteProject', async function (req, res) {
+	app.post('/project/deleteProject', async function (req, res) {
 		let token = req.header.token;
-		let id = req.query.id;
+		let id = req.body.id;
 
 		res.send({
 			flag: true,
@@ -30,10 +29,25 @@ function run(app) {
 		});
 	});
 
-	app.post('/project/modifyProject', async function (req, res) {
+	app.post('/project/modifyContent', async function (req, res) {
 		let token = req.header.token;
-		let id = req.query.id;
-		let content = req.query.content;
+		let id = req.body.id;
+		let content = req.body.content;
+
+		res.send({
+			flag: true,
+			code: 2000,
+			message: '修改成功',
+			data: {
+				modifyTime: Date.now()
+			}
+		});
+	});
+
+	app.post('/project/modifyName', async function (req, res) {
+		let token = req.header.token;
+		let id = req.body.id;
+		let name = req.body.name;
 
 		res.send({
 			flag: true,
@@ -63,7 +77,7 @@ function run(app) {
 		});
 	});
 
-	app.get('/project/getProjectInfo', async function (req, res) {
+	app.get('/project/getProjectContent', async function (req, res) {
 		let token = req.header.token;
 		let id = req.query.id;
 
@@ -73,6 +87,45 @@ function run(app) {
 			message: '获取成功',
 			data: {
 				content: '{}',
+			}
+		});
+	});
+
+	app.post('/project/release', async function (req, res) {
+		let token = req.header.token;
+		let id = req.query.id;
+		let temp = req.query.temp; // 是否是临时
+
+		res.send({
+			flag: true,
+			code: 2000,
+			message: '发布成功',
+			data: {
+				url: 'aaa.html',
+			}
+		});
+	});
+
+	app.get('/project/export', async function (req, res) {
+		let token = req.header.token;
+		let id = req.query.id;
+
+		let file = null;
+		res.send(file);
+	});
+
+	app.post('/project/import', async function (req, res) {
+		let token = req.header.token;
+		let name = req.body.projectName;
+		let file = req.body.file;
+
+		res.send({
+			flag: true,
+			code: 2000,
+			message: '导入成功',
+			data: {
+				id: '100001',
+				createTime: Date.now(),
 			}
 		});
 	});
