@@ -23,12 +23,16 @@ async function login(account, pwd) {
 
 async function modifyPwd(account, oldPwd, newpwd) {
 	let user = await userDao.getUser(account);
-	oldPwd = md5Util.hex_md5(oldPwd);
-	if (user.pwd == oldPwd) {
-		newpwd = md5Util.hex_md5(newpwd);
-		return (await userDao.updateUser(account, ['pwd'], [newpwd]));
-	} else {
+	if (user == null) {
 		return false;
+	} else {
+		oldPwd = md5Util.hex_md5(oldPwd);
+		if (user.pwd == oldPwd) {
+			newpwd = md5Util.hex_md5(newpwd);
+			return (await userDao.updateUser(account, ['pwd'], [newpwd]));
+		} else {
+			return false;
+		}
 	}
 }
 
