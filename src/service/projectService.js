@@ -1,6 +1,13 @@
 import projectDao from "../dao/projectDao.js";
+import userDao from "../dao/userDao.js";
 
 async function addProject(account, name) {
+
+	let user = await userDao.getUser(account);
+	if (user == null) {
+		return false;
+	}
+
 	let nowTime = Date.now();
 	let project = {
 		projectName: name,
@@ -10,8 +17,8 @@ async function addProject(account, name) {
 		modifyTime: nowTime,
 		isRelease: false
 	};
-	let id = await projectDao.addProject(project);
-	return id;
+	project.id = (await projectDao.addProject(project)) + '';
+	return project;
 }
 
 async function modifyProjectName(id, name) {
@@ -35,7 +42,7 @@ async function getProjectInfo(id) {
 }
 
 async function getProjectContent(id) {
-	return (await projectDao.getProjectContent(id));
+	return JSON.parse((await projectDao.getProjectContent(id)));
 }
 
 export default {

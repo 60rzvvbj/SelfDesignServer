@@ -2,7 +2,7 @@ import mysqlUtil from '../utils/mysqlUtil.js';
 
 // 获取所有用户的项目
 function getUserProject(account) {
-	let sql = 'select id, createTime, modifyTime, isRelease from project where account = ?';
+	let sql = 'select id, projectName, createTime, modifyTime, isRelease from project where account = ?';
 	let arr = [account];
 	return new Promise(function (resolve, reject) {
 		let conn = mysqlUtil.getConnection();
@@ -19,7 +19,7 @@ function getUserProject(account) {
 
 // 获取项目内容
 function getProjectInfo(id) {
-	let sql = 'select account, createTime, modifyTime, isRelease from project where id = ?';
+	let sql = 'select account, projectName, createTime, modifyTime, isRelease from project where id = ?';
 	let arr = [id];
 	return new Promise(function (resolve, reject) {
 		let conn = mysqlUtil.getConnection();
@@ -42,7 +42,7 @@ function getProjectContent(id) {
 		let conn = mysqlUtil.getConnection();
 		conn.query(sql, arr, function (err, results, fields) {
 			if (!err && results.length > 0) {
-				resolve(results[0]);
+				resolve(results[0].content);
 			} else {
 				resolve(null);
 			}
