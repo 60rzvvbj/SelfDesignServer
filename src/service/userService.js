@@ -21,6 +21,11 @@ async function login(account, pwd) {
 	}
 }
 
+async function getUserInfo(account) {
+	let user = await userDao.getUser(account);
+	return { username: user.username };
+}
+
 async function modifyPwd(account, oldPwd, newpwd) {
 	let user = await userDao.getUser(account);
 	if (user == null) {
@@ -43,6 +48,7 @@ async function modifyUserInfo(account, userInfo) {
 export default {
 	register,
 	login,
+	getUserInfo,
 	modifyPwd,
 	modifyUserInfo,
 };

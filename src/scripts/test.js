@@ -1,5 +1,6 @@
 import userService from "../service/userService.js";
 import projectService from "../service/projectService.js";
+import checkUtil from "../utils/checkUtil.js";
 
 async function register() {
 	let res = await userService.register('adminnn', '123456');
@@ -57,7 +58,9 @@ async function deleteProject() {
 }
 
 async function test() {
-	process.exit();
+	let res = checkUtil.check({ a: 0, b: undefined, c: 'asd' });
+	console.log(res);
+	// process.exit();
 }
 
 test();
