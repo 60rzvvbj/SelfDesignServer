@@ -1,11 +1,12 @@
 {
   "name": "selfdesignserver",
-  "version": "0.1.11",
+  "version": "0.1.16",
   "description": "SelfDesign Server",
   "main": "main.js",
   "scripts": {
     "exec": "node src/control.js",
-    "test": "node src/main.js",
+    "serve": "node src/main.js",
+    "test": "node src/scripts/test.js",
     "close": "node src/close.js"
   },
   "type": "module",

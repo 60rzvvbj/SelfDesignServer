@@ -19,13 +19,19 @@ function getToken(account) {
 	timer.set(account, setTimeout(function () {
 		set.delete(res);
 	}, time));
+
+	return res;
 };
 
 // 检验token
-function checkToken(account) {
+function checkToken(account, token) {
 	let now = map.get(account);
 	let res = md5Util.hex_md5(account + key + now);
-	return set.has(res);
+	if (token == res) {
+		return set.has(res);
+	} else {
+		return false;
+	}
 }
 
 export default {
