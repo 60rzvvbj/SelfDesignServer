@@ -13,7 +13,7 @@ function run(app) {
 		let pwd = req.body.pwd;
 
 		// 判断参数是否完整
-		if (!checkUtil.check(account, pwd)) {
+		if (!checkUtil.check({ account, pwd })) {
 			res.send(resultUtil.paramsError());
 			return;
 		}
@@ -36,7 +36,7 @@ function run(app) {
 		let pwd = req.body.pwd;
 
 		// 判断参数是否完整
-		if (!checkUtil.check(account, pwd)) {
+		if (!checkUtil.check({ account, pwd })) {
 			res.send(resultUtil.paramsError());
 			return;
 		}

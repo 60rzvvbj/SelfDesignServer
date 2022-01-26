@@ -22,11 +22,15 @@ async function addProject(account, name) {
 }
 
 async function modifyProjectName(id, name) {
-	return (await projectDao.updateProject(id, ['projectName'], [name]));
+	let modifyTime = Date.now();
+	let res = await projectDao.updateProject(id, ['projectName', 'modifyTime'], [name, modifyProjectName]);
+	return res ? { modifyTime } : false;
 }
 
 async function updateContent(id, content) {
-	return (await projectDao.updateProject(id, ['content'], [content]));
+	let modifyTime = Date.now();
+	let res = await projectDao.updateProject(id, ['content', 'modifyTime'], [content, modifyTime]);
+	return res ? { modifyTime } : false;
 }
 
 async function deleteProject(id) {
@@ -34,7 +38,17 @@ async function deleteProject(id) {
 }
 
 async function getUserProject(account) {
-	return (await projectDao.getUserProject(account));
+	let projects = await projectDao.getUserProject(account);
+	let res = [];
+	for (let i = 0; i < projects.length; i++) {
+		res.push({
+			id: projects.id,
+			name: projects.projectName,
+			createTime: projects.createTime,
+			modifyTime: projects.modifyTime
+		});
+	}
+	return res;
 }
 
 async function getProjectInfo(id) {
@@ -45,6 +59,15 @@ async function getProjectContent(id) {
 	return JSON.parse((await projectDao.getProjectContent(id)));
 }
 
+async function identityCheck(account, id) {
+	let project = await projectDao.getProjectInfo(id);
+	if (project) {
+		return account == project.account;
+	} else {
+		return false;
+	}
+}
+
 export default {
 	addProject,
 	modifyProjectName,
@@ -53,4 +76,5 @@ export default {
 	getUserProject,
 	getProjectContent,
 	getProjectInfo,
+	identityCheck,
 };

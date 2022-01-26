@@ -43,10 +43,20 @@ function paramsError() {
 	};
 }
 
+function identityError() {
+	return {
+		flag: false,
+		code: 4004,
+		message: '权限不足',
+		data: null
+	};
+}
+
 export default {
 	success,
 	reject,
 	accountError,
 	tokenError,
-	paramsError
+	paramsError,
+	identityError,
 };
