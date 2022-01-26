@@ -1,0 +1,1 @@
+import{_ as e}from"./index.28dcf011.js";import{o as c,c as r}from"./vendor.3cc80c7d.js";const n={};function o(t,a){return c(),r("div",null,"ProjectManagement")}var d=e(n,[["render",o]]);export{d as default};

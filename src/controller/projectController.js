@@ -8,7 +8,7 @@ function run(app) {
 	app.post('/project/createProject', async function (req, res) {
 
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let projectName = req.body.name;
 
@@ -34,7 +34,7 @@ function run(app) {
 	app.post('/project/deleteProject', async function (req, res) {
 
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let id = req.body.id;
 
@@ -70,7 +70,7 @@ function run(app) {
 	app.post('/project/modifyContent', async function (req, res) {
 
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let id = req.body.id;
 		let content = req.body.content;
@@ -107,7 +107,7 @@ function run(app) {
 	app.post('/project/modifyName', async function (req, res) {
 
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let id = req.body.id;
 		let name = req.body.name;
@@ -144,7 +144,7 @@ function run(app) {
 	app.get('/project/getUserProject', async function (req, res) {
 
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 
 		// 检验用户身份
@@ -163,7 +163,7 @@ function run(app) {
 	app.get('/project/getProjectContent', async function (req, res) {
 
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let id = req.query.id;
 
@@ -196,7 +196,7 @@ function run(app) {
 	});
 
 	app.post('/project/release', async function (req, res) {
-		let token = req.header.token;
+		let token = req.headers.token;
 		let id = req.query.id;
 		let temp = req.query.temp; // 是否是临时
 
@@ -211,7 +211,7 @@ function run(app) {
 	});
 
 	app.get('/project/export', async function (req, res) {
-		let token = req.header.token;
+		let token = req.headers.token;
 		let id = req.query.id;
 
 		let file = null;
@@ -219,7 +219,7 @@ function run(app) {
 	});
 
 	app.post('/project/import', async function (req, res) {
-		let token = req.header.token;
+		let token = req.headers.token;
 		let name = req.body.projectName;
 		let file = req.body.file;
 

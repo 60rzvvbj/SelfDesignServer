@@ -19,6 +19,8 @@ function getToken(account) {
 	timer.set(account, setTimeout(function () {
 		set.delete(res);
 	}, time));
+
+	return res;
 };
 
 // 检验token

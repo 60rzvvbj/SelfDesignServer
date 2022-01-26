@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-let staticUrl = path.resolve('../webapp/');
+let staticUrl = path.resolve('webapp/');
 
 //#region 
 // // 文件后缀
@@ -47,6 +47,10 @@ let staticUrl = path.resolve('../webapp/');
 
 // app.use(filter);
 
+// 过滤器
+import requestFilter from './filter/requestFilter.js';
+app.use(requestFilter.requestFilter);
+
 // // 转发
 // function forwardFile(source, aim) {
 // 	app.get(source, function (req, res) {
@@ -78,7 +82,9 @@ projectController.run(app);
 let port = 80;
 
 app.listen(port);
-console.log('服务器已启动 端口号' + port);
+console.log('local test  : http://localhost:80');
+console.log('server test : http://159.75.249.227/:8848');
+console.log();
 
 // 记录当前进程号
 let pid = process.pid;

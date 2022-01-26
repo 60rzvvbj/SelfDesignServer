@@ -1,8 +1,12 @@
+import resultUtil from "./resultUtil.js";
+import tokenUtil from "./tokenUtil.js";
+
 function check(obj) {
 	let flag = true;
 	for (let x in obj) {
 		if (obj[x] == null || obj[x] == undefined) {
 			flag = false;
+			console.log(obj, x);
 			break;
 		}
 	}
@@ -10,12 +14,12 @@ function check(obj) {
 }
 
 function checkUser(account, token, res) {
-	if (!checkUtil.check({ account })) {
+	if (!check({ account })) {
 		res.send(resultUtil.accountError());
 		return false;
 	}
 
-	if (!checkUtil.check({ token })) {
+	if (!check({ token })) {
 		res.send(resultUtil.paramsError());
 		return false;
 	}

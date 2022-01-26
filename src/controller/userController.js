@@ -60,8 +60,9 @@ function run(app) {
 
 	// 获取用户信息
 	app.get('/user/getUserInfo', async function (req, res) {
+
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 
 		// 检验用户身份
@@ -73,7 +74,7 @@ function run(app) {
 		let info = await userService.getUserInfo(account);
 
 		// 返回结果
-		if (flag) {
+		if (info) {
 			res.send(resultUtil.success('获取成功', info));
 		} else {
 			res.send(resultUtil.reject('获取失败'));
@@ -82,8 +83,9 @@ function run(app) {
 
 	// 修改密码
 	app.post('/user/modifyPassword', async function (req, res) {
+
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let oldPwd = req.body.oldPwd;
 		let newPwd = req.body.newPwd;
@@ -112,8 +114,9 @@ function run(app) {
 
 	// 修改用户名
 	app.post('/user/modifyUsername', async function (req, res) {
+
 		// 获取参数
-		let token = req.header.token;
+		let token = req.headers.token;
 		let account = req.cookies.account;
 		let username = req.body.username;
 
