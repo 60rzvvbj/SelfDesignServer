@@ -23,7 +23,7 @@ async function addProject(account, name) {
 
 async function modifyProjectName(id, name) {
 	let modifyTime = Date.now();
-	let res = await projectDao.updateProject(id, ['projectName', 'modifyTime'], [name, modifyProjectName]);
+	let res = await projectDao.updateProject(id, ['projectName', 'modifyTime'], [name, modifyTime]);
 	return res ? { modifyTime } : false;
 }
 
@@ -42,10 +42,10 @@ async function getUserProject(account) {
 	let res = [];
 	for (let i = 0; i < projects.length; i++) {
 		res.push({
-			id: projects.id,
-			name: projects.projectName,
-			createTime: projects.createTime,
-			modifyTime: projects.modifyTime
+			id: projects[i].id,
+			name: projects[i].projectName,
+			createTime: projects[i].createTime,
+			modifyTime: projects[i].modifyTime
 		});
 	}
 	return res;
@@ -62,7 +62,7 @@ async function getProjectContent(id) {
 async function identityCheck(account, id) {
 	let project = await projectDao.getProjectInfo(id);
 	if (project) {
-		return account == project.account;
+		return (account == project.account);
 	} else {
 		return false;
 	}

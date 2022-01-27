@@ -10,7 +10,7 @@ function run(app) {
 		// 获取参数
 		let token = req.headers.token;
 		let account = req.cookies.account;
-		let projectName = req.body.name;
+		let projectName = req.body.projectName;
 
 		// 检验用户身份
 		if (!checkUtil.checkUser(account, token, res)) {
@@ -50,7 +50,7 @@ function run(app) {
 		}
 
 		// 验证身份
-		if (!projectService.identityCheck(account, id)) {
+		if (!(await projectService.identityCheck(account, id))) {
 			res.send(resultUtil.identityError());
 			return;
 		}
@@ -87,7 +87,7 @@ function run(app) {
 		}
 
 		// 验证身份
-		if (!projectService.identityCheck(account, id)) {
+		if (!(await projectService.identityCheck(account, id))) {
 			res.send(resultUtil.identityError());
 			return;
 		}
@@ -124,7 +124,7 @@ function run(app) {
 		}
 
 		// 验证身份
-		if (!projectService.identityCheck(account, id)) {
+		if (!(await projectService.identityCheck(account, id))) {
 			res.send(resultUtil.identityError());
 			return;
 		}
@@ -179,7 +179,7 @@ function run(app) {
 		}
 
 		// 验证身份
-		if (!projectService.identityCheck(account, id)) {
+		if (!(await projectService.identityCheck(account, id))) {
 			res.send(resultUtil.identityError());
 			return;
 		}

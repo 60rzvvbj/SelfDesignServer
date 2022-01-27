@@ -83,7 +83,7 @@ let port = 80;
 
 app.listen(port);
 console.log('local test  : http://localhost:80');
-console.log('server test : http://159.75.249.227/:8848');
+console.log('server test : http://159.75.249.227:8848');
 console.log();
 
 // 记录当前进程号
