@@ -58,9 +58,8 @@ async function deleteProject() {
 }
 
 async function test() {
-	let res = checkUtil.check({ a: 0, b: undefined, c: 'asd' });
-	console.log(res);
-	// process.exit();
+    await register();
+	process.exit();
 }
 
 test();
