@@ -1,6 +1,7 @@
 import projectService from "../service/projectService.js";
 import resultUtil from "../utils/resultUtil.js";
 import checkUtil from "../utils/checkUtil.js";
+import fileService from "../service/fileService.js";
 
 function run(app) {
 
@@ -210,12 +211,27 @@ function run(app) {
 		});
 	});
 
+	// 导出
 	app.get('/project/export', async function (req, res) {
+
+		// 获取参数
 		let token = req.headers.token;
+		let account = req.cookies.account;
 		let id = req.query.id;
 
-		let file = null;
-		res.send(file);
+		// 检验用户身份
+		if (!checkUtil.checkUser(account, token, res)) {
+			return;
+		}
+
+		// 判断参数是否完整
+		if (!checkUtil.check({ id })) {
+			res.send(resultUtil.paramsError());
+			return;
+		}
+
+		// 开始获取文件
+		fileService.exportProject(id, res);
 	});
 
 	app.post('/project/import', async function (req, res) {

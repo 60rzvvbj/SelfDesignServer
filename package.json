@@ -1,6 +1,6 @@
 {
   "name": "selfdesignserver",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "SelfDesign Server",
   "main": "main.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "child_process": "^1.0.2",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "multer": "^1.4.4",
     "mysql": "^2.18.1"
   }
 }
