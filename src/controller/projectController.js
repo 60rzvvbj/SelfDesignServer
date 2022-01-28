@@ -156,7 +156,11 @@ function run(app) {
 		let projectList = await projectService.getUserProject(account);
 
 		// 返回结果
-		res.send(resultUtil.success('获取成功', { projectList }));
+		if (projectList) {
+			res.send(resultUtil.success('获取成功', { projectList }));
+		} else {
+			res.send(resultUtil.reject('获取失败'));
+		}
 	});
 
 	// 获取项目内容
