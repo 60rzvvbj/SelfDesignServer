@@ -40,6 +40,9 @@ async function deleteProject(id) {
 async function getUserProject(account) {
 	let projects = await projectDao.getUserProject(account);
 	let res = [];
+	if (!projects) {
+		return false;
+	}
 	for (let i = 0; i < projects.length; i++) {
 		res.push({
 			id: projects[i].id,

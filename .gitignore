@@ -2,9 +2,9 @@
 node_modules
 /dist
 log
-/log
-*log*
 runTime
+/log/pid.log
+log/pid.log
 
 # local env files
 .env.local

@@ -7,7 +7,7 @@ function getUserProject(account) {
 	return new Promise(function (resolve, reject) {
 		let conn = mysqlUtil.getConnection();
 		conn.query(sql, arr, function (err, results, fields) {
-			if (!err && results.length > 0) {
+			if (!err) {
 				resolve(results);
 			} else {
 				resolve(null);
