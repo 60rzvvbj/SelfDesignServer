@@ -38,89 +38,28 @@
             <input type="text" placeholder="value" name="value" />
           </li>
         </ul>
+        <input type="file" class="file" />
         <button>submit</button>
       </div>
     </form>
     <div class="show"></div>
   </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
-    function ajax(options, fileState) {
-      // 默认的请求配置对象,再用传入的对象覆盖默认配置对象,这样可以避免传参数的时候需要写所有的属性
-      var defaults = {
-        type: "get", // 请求方式
-        url: "", // 请求地址
-        data: {}, // 参数(对象形式)
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        }, // 请求头
-        success: function () {}, // 成功函数
-        error: function () {}, // 失败函数
+    const service = axios.create({
+      baseUrl: "/",
+      timeout: 8000,
+    });
+    function ajax(data) {
+      let obj = {
+        url: data.url,
+        method: data.type,
+        headers: data.header,
+        params: data.data,
+        data: data.data,
       };
-      Object.assign(defaults, options);
-
-      defaults.header["Content-Type"] = "application/x-www-form-urlencoded";
-
-      // 创建XMLHttpRequest对象
-      var xhr = new XMLHttpRequest();
-
-      if (fileState) {
-        xhr.open(options.type, options.url);
-        xhr.send(options.data);
-      } else {
-        // 拼接参数
-        var parameter = "";
-        for (var t in defaults.data) {
-          parameter += t + "=" + defaults.data[t] + "&";
-        }
-        parameter = parameter.substring(0, parameter.length - 1);
-
-        // 判断请求方式，并根据请求方式做不同的处理
-        if (defaults.type != "post") {
-          if (defaults.type == "put") {
-            defaults.url = defaults.url + "?" + parameter;
-            // defaults.url = defaults.url + '?' + parameter.replace(/\n/g, '\n\r');
-          } else {
-            defaults.url = defaults.url + "?" + parameter;
-          }
-          xhr.open(defaults.type, defaults.url);
-          // xhr.setRequestHeader('token', defaults.header['token']);
-          for (let headerKey in defaults.header) {
-            xhr.setRequestHeader(headerKey, defaults.header[headerKey]);
-          }
-          if (defaults.type == "put") {
-            var XHTTP = defaults.header["X-HTTP-Method-Override"];
-            xhr.setRequestHeader("X-HTTP-Method-Override", XHTTP);
-          }
-          xhr.send();
-        } else {
-          xhr.open(defaults.type, defaults.url);
-          for (let headerKey in defaults.header) {
-            xhr.setRequestHeader(headerKey, defaults.header[headerKey]);
-          }
-          if (defaults.header["ContentType"] == "application/json") {
-            xhr.send(JSON.stringify(defaults.data));
-          } else {
-            xhr.send(parameter);
-          }
-        }
-      }
-
-      // 设置onload函数
-      xhr.onload = function () {
-        // 对返回结果做处理，如果是json就把返回的json字符串转化成json对象
-        var contentType = xhr.getResponseHeader("Content-Type");
-        var responseText = xhr.responseText;
-        if (contentType.includes("application/json")) {
-          responseText = JSON.parse(responseText);
-        }
-
-        // 判断状态码并根据判断结果调用不同函数
-        if (xhr.status == 200) {
-          defaults.success(responseText, xhr);
-        } else {
-          defaults.error(responseText, xhr);
-        }
-      };
+      obj[data.type == "GET" ? "params" : "data"] = data.data;
+      return service(obj);
     }
 
     let urlBox = document.querySelector(".url");
@@ -128,7 +67,9 @@
     let btn = document.querySelector("button");
     let attr = document.querySelectorAll("li");
     let showBox = document.querySelector(".show");
-    btn.addEventListener("click", function (e) {
+    let fileBox = document.querySelector(".file");
+
+    btn.addEventListener("click", async function (e) {
       e.preventDefault();
       let obj = {
         type: methodBox.value,
@@ -145,7 +86,17 @@
           obj[inputs[0].value][inputs[1].value] = inputs[2].value;
         }
       }
-      ajax(obj);
+      if (obj.url == "/project/export") {
+        window.open(obj.url + "?id=" + obj.data.id);
+        return;
+      }
+      if (fileBox.files.length > 0) {
+        let formData = new FormData();
+        formData.append("file", fileBox.files[0]);
+        obj.data = formData;
+      }
+      let res = await ajax(obj);
+      showBox.innerText = JSON.stringify(res.data);
     });
   </script>
 </html>

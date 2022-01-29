@@ -1,7 +1,7 @@
 import projectDao from "../dao/projectDao.js";
 import userDao from "../dao/userDao.js";
 
-async function addProject(account, name) {
+async function addProject(account, name, content) {
 
 	let user = await userDao.getUser(account);
 	if (user == null) {
@@ -12,7 +12,7 @@ async function addProject(account, name) {
 	let project = {
 		projectName: name,
 		account: account,
-		content: '{}',
+		content: content ? content : '{}',
 		createTime: nowTime,
 		modifyTime: nowTime,
 		isRelease: false
