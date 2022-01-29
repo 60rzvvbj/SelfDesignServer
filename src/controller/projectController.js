@@ -1,7 +1,11 @@
+import multer from 'multer';
 import projectService from "../service/projectService.js";
 import resultUtil from "../utils/resultUtil.js";
 import checkUtil from "../utils/checkUtil.js";
 import fileService from "../service/fileService.js";
+import netUtil from '../utils/netUtil.js';
+
+let upload = multer({ dest: 'upload_tmp/' });
 
 function run(app) {
 
@@ -28,7 +32,12 @@ function run(app) {
 		let project = await projectService.addProject(account, projectName);
 
 		// 返回结果
-		res.send(resultUtil.success('创建成功', { id: project.id, createTime: project.createTime }));
+		if (project) {
+			res.send(resultUtil.success('创建成功', { id: project.id, createTime: project.createTime }));
+		} else {
+			res.send(resultUtil.reject('创建失败'));
+		}
+
 	});
 
 	// 删除项目
@@ -196,19 +205,41 @@ function run(app) {
 		}
 	});
 
+	// 发布
 	app.post('/project/release', async function (req, res) {
+
+		// 获取参数
 		let token = req.headers.token;
+		let account = req.cookies.account;
 		let id = req.query.id;
 		let temp = req.query.temp; // 是否是临时
 
-		res.send({
-			flag: true,
-			code: 2000,
-			message: '发布成功',
-			data: {
-				url: 'aaa.html',
-			}
-		});
+		// 检验用户身份
+		if (!checkUtil.checkUser(account, token, res)) {
+			return;
+		}
+
+		// 判断参数是否完整
+		if (!checkUtil.check({ id, temp })) {
+			res.send(resultUtil.paramsError());
+			return;
+		}
+
+		// 验证身份
+		if (!(await projectService.identityCheck(account, id))) {
+			res.send(resultUtil.identityError());
+			return;
+		}
+
+		// 开始发布
+		let url = await fileService.releaseProject(id, temp != 'false');
+
+		// 返回结果
+		if (url) {
+			res.send(resultUtil.success('发布成功', { url }));
+		} else {
+			res.send(resultUtil.reject('发布失败'));
+		}
 	});
 
 	// 导出
@@ -234,20 +265,45 @@ function run(app) {
 		fileService.exportProject(id, res);
 	});
 
-	app.post('/project/import', async function (req, res) {
-		let token = req.headers.token;
-		let name = req.body.projectName;
-		let file = req.body.file;
+	// 导入
+	app.post('/project/import', upload.any(), async function (req, res) {
 
-		res.send({
-			flag: true,
-			code: 2000,
-			message: '导入成功',
-			data: {
-				id: '100001',
-				createTime: Date.now(),
-			}
-		});
+		// 获取参数
+		let token = req.headers.token;
+		let account = req.cookies.account;
+		let name = req.body.projectName;
+		let file = req.files[0];
+
+		// 检验用户身份
+		if (!checkUtil.checkUser(account, token, res)) {
+			return;
+		}
+
+		// 判断参数是否完整
+		if (!checkUtil.check({ name, file })) {
+			res.send(resultUtil.paramsError());
+			return;
+		}
+
+		// 开始导入
+		let project = await fileService.importProject(account, name, file);
+
+		// 返回结果
+		if (project) {
+			res.send(resultUtil.success('导入成功', { id: project.id, createTime: project.createTime }));
+		} else {
+			res.send(resultUtil.reject('导入失败'));
+		}
+	});
+
+	// 获取预览文件
+	app.get('/preview/:fileName', function (req, res) {
+
+		// 获取参数
+		let fileName = req.params.fileName;
+
+		// 返回文件
+		fileService.getFile('\\release\\' + fileName + '.html', res);
 	});
 }
 

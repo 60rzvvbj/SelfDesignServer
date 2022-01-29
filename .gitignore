@@ -4,6 +4,7 @@ node_modules
 log
 /log
 *log*
+runTime
 
 # local env files
 .env.local

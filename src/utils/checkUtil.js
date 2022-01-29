@@ -14,7 +14,7 @@ function check(obj) {
 }
 
 function checkUser(account, token, res) {
-	// return true;
+	return true;
 	if (!check({ account })) {
 		res.send(resultUtil.accountError());
 		return false;

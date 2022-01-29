@@ -56,7 +56,7 @@ function run(app) {
 		}
 
 		// 开始获取文件
-		fileService.getFile(fileName, res);
+		fileService.getFile('/resource/' + fileName, res);
 	});
 
 }
