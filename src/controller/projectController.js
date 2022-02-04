@@ -254,10 +254,10 @@ function run(app) {
 		let account = req.cookies.account;
 		let id = req.query.id;
 
-		// 检验用户身份
-		if (!checkUtil.checkUser(account, token, res)) {
-			return;
-		}
+		// // 检验用户身份
+		// if (!checkUtil.checkUser(account, token, res)) {
+		// 	return;
+		// }
 
 		// 判断参数是否完整
 		if (!checkUtil.check({ id })) {
