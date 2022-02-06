@@ -1,5 +1,6 @@
 import multer from 'multer';
 import fileService from "../service/fileService.js";
+import projectService from "../service/projectService.js";
 import resultUtil from "../utils/resultUtil.js";
 import checkUtil from "../utils/checkUtil.js";
 
@@ -57,6 +58,20 @@ function run(app) {
 
 		// 开始获取文件
 		fileService.getFile('/resource/' + fileName, res);
+	});
+
+	app.get('/other/getTemplate', async function (req, res) {
+
+		// 获取参数
+		let token = req.headers.token;
+		let account = req.cookies.account;
+
+		// 检验用户身份
+		if (!checkUtil.checkUser(account, token, res)) {
+			return;
+		}
+
+		res.send(resultUtil.success('获取成功', projectService.templates));
 	});
 
 }
