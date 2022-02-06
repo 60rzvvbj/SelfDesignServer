@@ -27,7 +27,18 @@ function translate(content) {
 // 获取节点
 function getNode(node) {
 	let createFuncrion = nodeParser[`analysis${node.tag}`];
+	analysisEvent(node);
 	return createFuncrion(node);
+}
+
+// 解析事件
+function analysisEvent(node) {
+	if (node.event) {
+		for (let e of node.event) {
+			script += `addEvent(${node.id}, '${e.type}', '${e.action}', '${e.handleType}', '${e.argument}');
+				`;
+		}
+	}
 }
 
 // 节点解析器
@@ -106,16 +117,13 @@ function createHtml(lang, title, icoUrl, content, script) {
 				${icoUrl ? `<link href="${icoUrl}" rel="icon" type="image/x-ico" />` : ''}
 				<link rel="stylesheet" href="../release/release.css" />
 				<title>${title}</title>
-				<style>
-
-				</style>
 			</head>
 			<body>
 				${content}
 			</body>
 			<script src="../release/release.js"></script>
 			<script>
-
+				${script}
 			</script>
 		</html>
 	`;
