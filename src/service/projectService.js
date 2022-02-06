@@ -1,6 +1,68 @@
 import projectDao from "../dao/projectDao.js";
 import userDao from "../dao/userDao.js";
 
+let templates = [
+	{
+		"tag": "PositionLayout",
+		"style": {},
+		"children": [],
+		"events": [],
+	},
+	{
+		"tag": "HorizontalLayout",
+		"style": {},
+		"children": [],
+		"events": [],
+	},
+	{
+		"tag": "VerticalLayout",
+		"style": {},
+		"children": [],
+		"events": [],
+	},
+	{
+		"tag": "Text",
+		"style": {},
+		"values": {
+			"content": "",
+		},
+		"events": [],
+	},
+	{
+		"tag": "Button",
+		"style": {},
+		"values": {
+			"content": "",
+		},
+		"events": [],
+	},
+	{
+		"tag": "Image",
+		"style": {},
+		"values": {
+			"url": "",
+		},
+		"events": [],
+	},
+];
+
+let projectName = null;
+let initData = {
+	"lang": "en",
+	"title": projectName,
+	"icoUrl": null,
+	"root": {
+		"id": 1,
+		"tag": "VerticalLayout",
+		"style": {
+			"width": "100%",
+			"height": "100%",
+			// 等等VerticalLayout的初始默认样式
+		},
+		"children": []
+	}
+};
+
 async function addProject(account, name, content) {
 
 	let user = await userDao.getUser(account);
@@ -8,11 +70,15 @@ async function addProject(account, name, content) {
 		return false;
 	}
 
+	// 初始化项目内容
+	initData.title = name;
+	let projectContent = content ? content : initData;
+
 	let nowTime = Date.now();
 	let project = {
 		projectName: name,
 		account: account,
-		content: content ? content : '{}',
+		content: projectContent,
 		createTime: nowTime,
 		modifyTime: nowTime,
 		isRelease: false
@@ -72,6 +138,7 @@ async function identityCheck(account, id) {
 }
 
 export default {
+	templates,
 	addProject,
 	modifyProjectName,
 	updateContent,

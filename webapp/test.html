@@ -93,8 +93,8 @@
       if (fileBox.files.length > 0) {
         let formData = new FormData();
         formData.append("file", fileBox.files[0]);
-        if (pbj.data.url == "/project/import") {
-          formData.append("projectName", "test");
+        if (obj.url == "/project/import") {
+          formData.append("projectName", obj.data.projectName);
         }
         obj.data = formData;
       }
