@@ -84,7 +84,11 @@ async function addProject(account, name, content) {
 		isRelease: false
 	};
 	project.id = (await projectDao.addProject(project)) + '';
-	return project;
+	if (project.id == 'false') {
+		return false;
+	} else {
+		return project;
+	}
 }
 
 async function modifyProjectName(id, name) {
