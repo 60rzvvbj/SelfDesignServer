@@ -1,26 +1,26 @@
 import projectDao from "../dao/projectDao.js";
 import userDao from "../dao/userDao.js";
 
-let templates = [
-	{
+let templates = {
+	"PositionLayout": {
 		"tag": "PositionLayout",
 		"style": {},
 		"children": [],
 		"events": [],
 	},
-	{
+	"HorizontalLayout": {
 		"tag": "HorizontalLayout",
 		"style": {},
 		"children": [],
 		"events": [],
 	},
-	{
+	"VerticalLayout": {
 		"tag": "VerticalLayout",
 		"style": {},
 		"children": [],
 		"events": [],
 	},
-	{
+	"Text": {
 		"tag": "Text",
 		"style": {},
 		"values": {
@@ -28,7 +28,7 @@ let templates = [
 		},
 		"events": [],
 	},
-	{
+	"Button": {
 		"tag": "Button",
 		"style": {},
 		"values": {
@@ -36,7 +36,7 @@ let templates = [
 		},
 		"events": [],
 	},
-	{
+	"Image": {
 		"tag": "Image",
 		"style": {},
 		"values": {
@@ -44,7 +44,7 @@ let templates = [
 		},
 		"events": [],
 	},
-];
+};
 
 let projectName = null;
 let initData = {
