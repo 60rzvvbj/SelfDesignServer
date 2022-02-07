@@ -44,7 +44,9 @@ function setStyle(dom, style) {
 
 let toastStatus = true;
 
-async function toast(text) {
+let handler = {};
+
+handler.toast = async function (text) {
 	if (!toastStatus) {
 		return;
 	}
@@ -59,7 +61,7 @@ async function toast(text) {
 	await domFadeOut(div);
 	body.removeChild(div);
 	toastStatus = true;
-}
+};
 
 function windowMove(dom, conti) {
 	let scrollTop = document.scrollingElement.scrollTop;
@@ -80,12 +82,38 @@ function windowMove(dom, conti) {
 	funTop();
 }
 
-async function jump(id) {
-	windowMove(document.getElementById(id), 0);
-}
+handler.alert = async function (text) {
+	window.alert(text);
+};
 
-async function slide(id) {
+handler.jump = async function (id) {
+	windowMove(document.getElementById(id), 0);
+};
+
+handler.slide = async function (id) {
 	windowMove(document.getElementById(id), 300);
+};
+
+handler.target = async function (url) {
+	location.href = url;
+};
+
+handler.blank = async function (url) {
+	console.log(url);
+	window.open(url);
+};
+
+let mouseActionMapper = {
+	click: 'click',
+};
+
+function addEvent(triggerId, type, action, handle, arg) {
+	let trigger = document.getElementById(triggerId);
+	if (type == 'mouse') {
+		trigger.addEventListener(mouseActionMapper[action], function () {
+			handler[handle](arg);
+		});
+	}
 }
 
 // document.addEventListener('keyup', (e) => {
