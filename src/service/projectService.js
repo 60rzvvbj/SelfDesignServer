@@ -72,7 +72,7 @@ async function addProject(account, name, content) {
 
 	// 初始化项目内容
 	initData.title = name;
-	let projectContent = content ? content : initData;
+	let projectContent = content ? content : JSON.stringify(initData);
 
 	let nowTime = Date.now();
 	let project = {
