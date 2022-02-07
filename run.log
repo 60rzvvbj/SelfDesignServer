@@ -1,0 +1,5 @@
+
+> selfdesignserver@0.2.2 exec
+> node src/control.js
+
+服务器启动
