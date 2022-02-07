@@ -181,9 +181,10 @@ let testContent = {
 };
 
 async function test() {
-	let res = releaseService.translate(testContent);
-	fs.writeFileSync('C:/Users/Administrator/Desktop/test.html', res);
-	// process.exit();
+	let res = await projectService.addProject('admin', 'testbug');
+	// let res = releaseService.translate(testContent);
+	// fs.writeFileSync('C:/Users/Administrator/Desktop/test.html', res);
+	process.exit();
 };
 
 test();
