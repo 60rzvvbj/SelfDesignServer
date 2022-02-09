@@ -20,6 +20,7 @@ let script = '';
 // 将数据转化成HTML文档
 function translate(content) {
 	let contentStr = getNode(content.root);
+	script = '';
 	let res = createHtml(content.lang, content.title, content.icoUrl, contentStr, script);
 	return res;
 }
@@ -51,7 +52,7 @@ let nodeParser = {
 	},
 	analysisButton(node) {
 		let res = `
-			<div id="${node.id}" class="Button" style="${getStyle(node.style)}">${node.values.content}</div>
+			<button id="${node.id}" class="Button" style="${getStyle(node.style)}">${node.values.content}</button>
 		`;
 		return res;
 	},
