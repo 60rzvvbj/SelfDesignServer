@@ -29,8 +29,10 @@ async function uploadImage(file) {
 }
 
 async function getFile(fileName, res) {
+	console.log(fileName);
 	let target = path.resolve(basePath + fileName);
 	let mimeType = mimeUtil.getMimeType(fileName.split('.').pop());
+	console.log(mimeType);
 	res.setHeader('Content-Type', mimeType + ';charset=utf-8');
 	netUtil.returnResources(target, res);
 }
