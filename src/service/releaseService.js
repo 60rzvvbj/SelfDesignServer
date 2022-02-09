@@ -57,7 +57,7 @@ let nodeParser = {
 	},
 	analysisImage(node) {
 		let res = `
-			<div id="${node.id}" class="Image" style="${getStyle(node.style)}"></div>
+			<img id="${node.id}" class="Image" style="${getStyle(node.style)}" src="${node.value.url}">
 		`;
 		return res;
 	},
