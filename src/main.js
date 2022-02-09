@@ -18,6 +18,8 @@ let staticUrl = path.resolve('webapp/');
 
 // 过滤器
 import requestFilter from './filter/requestFilter.js';
+import forwardFilter from './filter/forwardFilter.js';
+forwardFilter.use(app);
 app.use(requestFilter.requestFilter);
 
 // // 转发
