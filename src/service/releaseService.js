@@ -45,7 +45,7 @@ function analysisEvent(node) {
 let nodeParser = {
 	analysisText(node) {
 		let res = `
-			<span id="${node.id}" class="Text" style="${getStyle(node.style)}">${node.values.content}</span>
+			<p id="${node.id}" class="Text" style="${getStyle(node.style)}">${node.values.content}</p>
 		`;
 		return res;
 	},

@@ -5,7 +5,7 @@ let key = '60rzvvbj'; // 密钥
 let set = new Set(); // 存当前生效可用的token
 let map = new Map(); // 存用户账号和时间戳的对应
 let timer = new Map(); // 存定时器
-let time = constUtil.HOUR; // token有效时间
+let time = constUtil.WEEK; // token有效时间
 
 // 获取token
 function getToken(account) {
