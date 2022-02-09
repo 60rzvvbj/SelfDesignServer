@@ -7,7 +7,7 @@ let routes = [
 	'/tutorial',
 	'/project',
 	'/template',
-	'/projectEdit'
+	'/projectEdit/:id'
 ];
 
 function use(app) {
