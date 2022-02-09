@@ -82,7 +82,7 @@ function windowMove(dom, conti) {
 	funTop();
 }
 
-handler.alert = async function (text) {
+handler.modal = async function (text) {
 	window.alert(text);
 };
 
