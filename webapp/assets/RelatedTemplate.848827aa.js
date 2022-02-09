@@ -1,0 +1,1 @@
+import{_ as e}from"./index.8500d929.js";import{e as r,o as t}from"./vendor.7379f245.js";const a={};function o(n,c){return t(),r("div",null,"RelatedTemplate")}var d=e(a,[["render",o]]);export{d as default};

@@ -1,1 +1,0 @@
-import{_ as c}from"./index.28dcf011.js";import{o as e,c as o}from"./vendor.3cc80c7d.js";const r={};function t(n,a){return e(),o("div",null,"NoviceTutorial")}var _=c(r,[["render",t]]);export{_ as default};
