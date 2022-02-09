@@ -236,7 +236,7 @@ function run(app) {
 		}
 
 		// 开始发布
-		let url = await fileService.releaseProject(id, temp != 'false');
+		let url = await fileService.releaseProject(id, temp);
 
 		// 返回结果
 		if (url) {
@@ -305,9 +305,10 @@ function run(app) {
 
 		// 获取参数
 		let fileName = req.params.fileName;
+		
 
 		// 返回文件
-		fileService.getFile('\\release\\' + fileName + '.html', res);
+		fileService.getFile('/release/' + fileName + '.html', res);
 	});
 }
 
