@@ -215,8 +215,8 @@ function run(app) {
 		// 获取参数
 		let token = req.headers.token;
 		let account = req.cookies.account;
-		let id = req.query.id;
-		let temp = req.query.temp; // 是否是临时
+		let id = req.body.id;
+		let temp = req.body.temp; // 是否是临时
 
 		// 检验用户身份
 		if (!checkUtil.checkUser(account, token, res)) {

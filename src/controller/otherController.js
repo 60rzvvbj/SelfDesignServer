@@ -41,14 +41,12 @@ function run(app) {
 	app.get('/other/getImage', async function (req, res) {
 
 		// 获取参数
-		let token = req.headers.token;
-		let account = req.cookies.account;
 		let fileName = req.query.fileName;
 
 		// 检验用户身份
-		if (!checkUtil.checkUser(account, token, res)) {
-			return;
-		}
+		// if (!checkUtil.checkUser(account, token, res)) {
+		// 	return;
+		// }
 
 		// 判断参数是否完整
 		if (!checkUtil.check({ fileName })) {

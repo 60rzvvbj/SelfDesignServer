@@ -5,6 +5,7 @@ log
 runTime
 /log/pid.log
 log/pid.log
+ArchiveLog
 
 # local env files
 .env.local
